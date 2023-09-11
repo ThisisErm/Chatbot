@@ -36,34 +36,28 @@ def app():
             st.session_state.username = user.uid
             st.session_state.username = user.email
             
-            st.session_state.signedOut = True
-            st.session_state.signOut = True
+            st.session_state.signedIn = True
+            st.session_state.signIn = True
 
-
-            
-           
 
         except:
             st.warning('Login Failed')
             
     # LOG OFF LOGIC
     def logOff():
-        st.session_state.signOut = False
-        st.session_state.signedOut = False
+        st.session_state.signIn = False
+        st.session_state.signedIn = False
         st.session_state.username= ''
         
             
-    if 'signedOut' not in st.session_state:
-        st.session_state.signedOut = False
-    if 'signOut' not in st.session_state:
-        st.session_state.signOut = False
+    if 'signedIn' not in st.session_state:
+        st.session_state.signedIn = False
+    if 'signIn' not in st.session_state:
+        st.session_state.signIn = False
         
-    if not st.session_state['signedOut']:
+    if not st.session_state['signedIn']:
         choice = st.selectbox('Login/Signup', ['Log In', 'Sign Up'])
 
-            
-            
-            
         
         if choice == 'Log In':
             email = st.text_input('Email Address')
@@ -84,7 +78,7 @@ def app():
                 st.markdown('Please Log In using your email and password')
                 st.balloons()
     
-    if st.session_state.signOut:
+    if st.session_state.signIn:
         st.sidebar.header(f'Welcome {st.session_state.username}!')
         
         #LLM (temp decides how creative)
@@ -112,10 +106,8 @@ def app():
                 st.write("Please upload a text file.")
         
     
-        
         st.sidebar.button('Sign Out', on_click =logOff, key='logoff')
         
-        
-            
+    
 app()
     
